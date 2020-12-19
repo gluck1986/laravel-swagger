@@ -10,10 +10,11 @@
     }
   ],
   "require": {
-    "php": ">=7.1.0,<8.0",
+    "php": ">=7.1.0",
     "ext-fileinfo": "*",
-    "laravel/framework": "<6.0",
-    "minime/annotations": "2.3.1"
+    "laravel/framework": ">=5.3.0",
+    "minime/annotations": "2.3.1",
+    "phpunit/phpunit": "^8.5.8|^9.3.3"
   },
   "autoload": {
     "psr-4": {
