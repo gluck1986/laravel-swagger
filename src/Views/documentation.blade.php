@@ -64,8 +64,8 @@
     </defs>
 </svg>
 <div id="swagger-ui"></div>
-<script src="/auto-doc/swagger-ui-bundle.js"> </script>
-<script src="/auto-doc/swagger-ui-standalone-preset.js"> </script>
+<script src="/auto-doc/swagger-ui-bundle.js" charset="UTF-8"> </script>
+<script src="/auto-doc/swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
 <script>
   window.onload = function() {
     // Build a system
