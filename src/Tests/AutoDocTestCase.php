@@ -6,32 +6,16 @@ use Gluck1986\Support\AutoDoc\Http\Middleware\AutoDocMiddleware;
 use Gluck1986\Support\AutoDoc\Services\SwaggerService;
 use Illuminate\Foundation\Testing\TestCase;
 
-class AutoDocTestCase extends TestCase
+/**
+ * @deprecated use SaveResultExtension
+ */
+abstract class AutoDocTestCase extends TestCase
 {
-    protected $docService;
 
-    public function setUp(): void
+    public static function tearDownAfterClass(): void
     {
-        parent::setUp();
-
-        $this->docService = app(SwaggerService::class);
-    }
-
-    public function createApplication()
-    {
-        parent::createApplication();
-    }
-
-    public function tearDown(): void
-    {
-        $currentTestCount = $this->getTestResultObject()->count();
-        $allTestCount = $this->getTestResultObject()->topTestSuite()->count();
-
-        if (($currentTestCount == $allTestCount) && (!$this->hasFailed())) {
-            $this->docService->saveProductionData();
-        }
-
-        parent::tearDown();
+        parent::tearDownAfterClass();
+        app(SwaggerService::class)->saveProductionData();
     }
 
     /**

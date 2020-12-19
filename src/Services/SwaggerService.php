@@ -17,6 +17,7 @@ use Illuminate\Container\Container;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Testing\File;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Minime\Annotations\Cache\ArrayCache;
@@ -107,7 +108,7 @@ class SwaggerService
             $method
         );
 
-        $result = array_first($parameters, function ($key, $parameter) {
+        $result = Arr::first($parameters, function ($key, $parameter) {
             if (class_exists($key)) {
                 $rClass = new \ReflectionClass($key);
 
@@ -253,7 +254,7 @@ class SwaggerService
         $this->uri = "/{$this->getUri()}";
         $this->method = strtolower($this->request->getMethod());
 
-        if (empty(array_get($this->data, "paths.{$this->uri}.{$this->method}"))) {
+        if (empty(Arr::get($this->data, "paths.{$this->uri}.{$this->method}"))) {
             $this->data['paths'][$this->uri][$this->method] = [
                 'tags' => [],
                 'consumes' => [],
@@ -283,7 +284,7 @@ class SwaggerService
 
         preg_match_all('/{.*?}/', $this->uri, $params);
 
-        $params = array_collapse($params);
+        $params = Arr::collapse($params);
 
         $result = [];
 
@@ -429,7 +430,7 @@ class SwaggerService
 
             $description = $annotations->get($parameter, implode(', ', $normalisedRulesArray));
 
-            $existedParameter = array_first(
+            $existedParameter = Arr::first(
                 $this->item['parameters'],
                 function ($existedParameter, $key) use ($parameter) {
                     return $existedParameter['name'] == $parameter;
@@ -570,7 +571,7 @@ class SwaggerService
     {
         $parameters = $this->data['paths'][$this->uri][$this->method]['parameters'];
 
-        $bodyParamExisted = array_where($parameters, function ($value, $key) {
+        $bodyParamExisted = Arr::where($parameters, function ($value, $key) {
             return $value['name'] == 'body';
         });
 
@@ -675,17 +676,17 @@ class SwaggerService
             File::class => '[uploaded_file]',
         ];
 
-        $parameters = array_dot($parameters);
+        $parameters = Arr::dot($parameters);
         $returnParameters = [];
 
         foreach ($parameters as $parameter => $value) {
             if (is_object($value)) {
                 $class = get_class($value);
 
-                $value = array_get($classNamesValues, $class, $class);
+                $value = Arr::get($classNamesValues, $class, $class);
             }
 
-            array_set($returnParameters, $parameter, $value);
+            Arr::set($returnParameters, $parameter, $value);
         }
 
         return $returnParameters;

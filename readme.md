@@ -18,7 +18,12 @@ to display the generated documentation for a config.
  
 ### Plugin
  1. Add middleware **\Gluck1986\Support\AutoDoc\Http\Middleware\AutoDocMiddleware::class** to *Http/Kernel.php*.
- 1. Set **\Gluck1986\Support\AutoDoc\Tests\AutoDocTestCase** as parent of your TestCase in *tests/TestCase.php*
+ 1. Add to your phpunit.xml:
+    ```xml
+    <extensions>
+          <extension class="Gluck1986\Support\AutoDoc\Extensions\SaveResultExtension"/>
+    </extensions> 
+    ```
  1. In *config/auto-doc.php* you can specify enabling of plugin, info of your project, 
  some defaults descriptions and route for rendering of documentation. 
  1. In *.env* file you should add following lines
