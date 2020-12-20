@@ -168,15 +168,7 @@ class SwaggerService
 
     protected function setDataCollector()
     {
-        $dataCollectorClass = config('auto-doc.data_collector');
-
-        if (empty($dataCollectorClass)) {
-            $this->dataCollector = app(LocalDataCollector::class);
-        } elseif (!class_exists($dataCollectorClass)) {
-            throw new DataCollectorClassNotFoundException();
-        } else {
-            $this->dataCollector = app($dataCollectorClass);
-        }
+        $this->dataCollector = app(LocalDataCollector::class);
     }
 
     protected function generateEmptyData()
