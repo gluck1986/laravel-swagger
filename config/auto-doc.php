@@ -84,22 +84,5 @@ return [
         ]
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Data Collector Class
-    |--------------------------------------------------------------------------
-    |
-    | Class of data collector, which will collect and save documentation
-    | It can be your own data collector class which should be inherited from
-    | Gluck1986\Support\AutoDoc\Interfaces\DataCollectorInterface interface,
-    | or our data collectors from next packages:
-    |
-    | ronasit/local-data-collector
-    | ronasit/laravel-remote-data-collector
-    |
-    | If config not set, will be using ronasit/local-data-collector
-    */
-
-    'data_collector' => '',
     'production_path' => env('LOCAL_DATA_COLLECTOR_PROD_PATH')
 ];

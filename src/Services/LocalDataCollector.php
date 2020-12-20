@@ -10,9 +10,13 @@ class LocalDataCollector
     protected static $data;
     public $prodFilePath;
 
-    public function __construct()
+    public function __construct($prodFilePath = null)
     {
-        $this->prodFilePath = config('auto-doc.production_path');
+        if ($prodFilePath) {
+            $this->prodFilePath = $prodFilePath;
+        } else {
+            $this->prodFilePath = config('auto-doc.production_path');
+        }
         if (empty($this->prodFilePath)) {
             throw new MissedProductionFilePathException();
         }

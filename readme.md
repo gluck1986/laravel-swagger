@@ -20,15 +20,20 @@ to display the generated documentation for a config.
  1. Add middleware **\Gluck1986\Support\AutoDoc\Http\Middleware\AutoDocMiddleware::class** to *Http/Kernel.php*.
  1. Add to your phpunit.xml:
     ```xml
-    <extensions>
-          <extension class="Gluck1986\Support\AutoDoc\Extensions\SaveResultExtension"/>
-    </extensions> 
+   <extensions>
+        <extension class="Gluck1986\Support\AutoDoc\Extensions\SaveResultExtension">
+            <arguments>
+                <string>path</string>
+            </arguments>
+        </extension>
+    </extensions>
     ```
+    for example path is 'public/swagger.json'
  1. In *config/auto-doc.php* you can specify enabling of plugin, info of your project, 
  some defaults descriptions and route for rendering of documentation. 
  1. In *.env* file you should add following lines
     `
-    LOCAL_DATA_COLLECTOR_PROD_PATH=/example-folder/documentation.json  
+    LOCAL_DATA_COLLECTOR_PROD_PATH = public/swagger.json
     LOCAL_DATA_COLLECTOR_TEMP_PATH=/tmp/documentation.json
     `
 
